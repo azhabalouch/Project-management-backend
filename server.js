@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const helmet = require('helmet');
 const userProfileRouter = require('./routes/user/profile')
@@ -12,6 +13,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+app.use(express.json());
 
 app.use('/user/profile', userProfileRouter);
 app.use('/login', userLogin);
