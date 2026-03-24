@@ -1,23 +1,23 @@
-const express = require("express")
-const app = express()
-const port = 3000
+const express = require("express");
+const helmet = require('helmet');
+const userProfileRouter = require('./routes/user/profile')
+const userLogin = require('./routes/login')
+const cors = require('cors');
+const app = express();
 
-app.get("/", (req, res) => {
-    res.send("Get data for user")
-})
+app.use(helmet());
 
-app.post("/", (req, res) => {
-    res.send("Got a POST request from user")
-})
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
-app.put("/", (req, res) => {
-    res.send("Got a PUT request from user")
-})
+app.use('/user/profile', userProfileRouter);
+app.use('/login', userLogin);
 
-app.delete("/", (req, res) => {
-    res.send("Got a DELETE request for user data")
-})
+const port = 3000;
 
 app.listen(port, () => {
-    console.log(`App is running on port ${port}`)
-})
+    console.log(`App is listening at http://localhost:${port}`);
+});
