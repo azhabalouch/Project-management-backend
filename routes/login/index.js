@@ -1,29 +1,6 @@
 const express = require('express');
+const { signInWithPassword } = require('../../utils/signInUtils');
 const router = express.Router();
-const refresh = require('./refresh')
-
-const getApiUrl = () => `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.ENV_API_KEY}`;
-
-async function signInWithPassword(data) {
-  const response = await fetch(getApiUrl(), {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  });
-
-  const responseData = await response.json();
-
-  if (response.ok) {
-    return responseData;
-  }
-
-  const errorMessage = responseData.error?.message || response.statusText || "Authentication failed";
-  const error = new Error(errorMessage);
-  error.status = response.status;
-  throw error;
-}
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
