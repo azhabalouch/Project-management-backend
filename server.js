@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./config/firebase');
 
 const express = require("express");
 const helmet = require('helmet');
@@ -6,6 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser')
 
 const userLogin = require('./routes/login')
+const userTask = require('./routes/user/task');
 
 const app = express();
 
@@ -23,6 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/login', userLogin);
+app.use('/user', userTask);
 
 const port = 3000;
 
