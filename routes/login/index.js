@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const refresh = require('./refresh')
 
 const getApiUrl = () => `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.ENV_API_KEY}`;
 
@@ -30,7 +31,29 @@ router.post("/", async (req, res) => {
 
   try {
     const response = await signInWithPassword({ email, password, returnSecureToken });
-    res.status(200).json(response);
+
+    const idToken = response.idToken;
+    const refreshToken = response.refreshToken;
+
+    res.cookie('idToken', idToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'Strict',
+      maxAge: 3600000 
+    });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'Strict',
+      maxAge: 604800000 
+    });
+
+    res.status(200).json({
+      displayName: response.displayName,
+      email: response.email,
+      localId: response.localId 
+    });
   } catch (error) {
     console.error("Sign-in Error:", error.message);
     const statusCode = error.status || 500;
