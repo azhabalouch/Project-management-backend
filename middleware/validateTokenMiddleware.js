@@ -30,7 +30,7 @@ async function verifyToken(req, res, next) {
   const refreshToken = req.cookies.refreshToken;
 
   if (!idToken && !refreshToken) {
-    return res.status(401).send('Unauthorized: Missing cookie');
+    return res.status(401).send('Unauthorized: Invalid credentials.');
   }
 
   try {
