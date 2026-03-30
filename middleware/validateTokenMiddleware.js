@@ -3,7 +3,7 @@
  */
 
 const { getAuth } = require('firebase-admin/auth');
-const { refreshFirebaseToken } = require('../utils/refreshTokenUtils');
+const refreshFirebaseToken = require('../utils/refreshTokenUtils');
 
 async function setNewIdToken(req, res, refreshToken){
   const newTokens = await refreshFirebaseToken(refreshToken);
@@ -25,7 +25,7 @@ async function setNewIdToken(req, res, refreshToken){
   req.user = await getAuth().verifyIdToken(newTokens.id_token);
 }
 
-async function verifyToken(req, res, next) {
+module.exports = async function verifyToken(req, res, next) {
   const idToken = req.cookies.idToken;
   const refreshToken = req.cookies.refreshToken;
 
@@ -57,5 +57,3 @@ async function verifyToken(req, res, next) {
     }
   } 
 }
-
-module.exports = verifyToken;

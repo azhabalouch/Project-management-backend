@@ -1,6 +1,6 @@
 const getApiUrl = () => `https://securetoken.googleapis.com/v1/token?key=${process.env.ENV_API_KEY}`;
 
-async function refreshFirebaseToken(refreshToken){
+module.exports = async function refreshFirebaseToken(refreshToken){
   const response = await fetch(getApiUrl(), {
     method: 'POST',
     headers: {

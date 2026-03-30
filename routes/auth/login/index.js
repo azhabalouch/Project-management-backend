@@ -1,5 +1,5 @@
 const express = require('express');
-const { signInWithPassword } = require('../../utils/signInUtils');
+const signInWithPassword = require('./loginUtils');
 const router = express.Router();
 
 router.post("/", async (req, res) => {
