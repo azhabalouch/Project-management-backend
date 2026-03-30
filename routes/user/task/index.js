@@ -1,35 +1,27 @@
 const express = require('express');
 const verifyToken = require('../../../middleware/validateTokenMiddleware');
 const router = express.Router();
+const createTask = require('./createTaskUtils');
 
 router.use(verifyToken);
 
-router.post("/task", (req, res) => {
-  /** 
-   * Separate file that will create
+router.post("/task", async (req, res) => {
+  const response = await createTask({
+      title: req.body.title,
+      description: req.body.description,
+      status: req.body.status,
+      isCompleted: req.body.isCompleted,
+      // parentTaskId: req.parentTaskId,
+      assigneeId: req.body.userId,
+      createdAt: new Date().toISOString(),
+      dueDate: req.body.dueDate,
+  });
 
-    Table Users {
-      user_id uuid [primary key]
-      first_name varchar(50) [not null]
-      last_name varchar(50) [not null]
-    }
-
-    Table Tasks {
-      task_id uuid [primary key]
-      title varchar(200) [not null]
-      description text
-      status varchar [not null]
-      is_completed boolean [default: false]
-      parent_task_id uuid [ref: > Tasks.task_id]
-      assignee_id uuid [ref: > Users.user_id]
-      created_at timestamp [default: `now()`]
-      due_date timestamp
-      completed_at timestamp
-    }
-
-  */
-  console.log(req.body);
-  console.log("Created task: test");
+  if (response){
+    res.status(200).send("Task created successfully.");
+  } else {
+    res.status(404).send("Task creation failed.");
+  }
 })
 
 module.exports = router;

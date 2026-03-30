@@ -2,9 +2,9 @@ const { getFirestore } = require('firebase-admin/firestore')
 
 const db = getFirestore();
 
-module.exports = async function createUserData(userid, userData){
+module.exports = async function createUserData(userId, userData){
   try {
-    const userRef = db.collection('users').doc(userid);
+    const userRef = db.collection('users').doc(userId);
 
     const profileRef = userRef.collection('profile').doc('details');
 
@@ -14,7 +14,7 @@ module.exports = async function createUserData(userid, userData){
         lastName: userData.lastName
       },
       email: userData.email,
-      userId: userid
+      userId: userId
     });
 
     return true;
