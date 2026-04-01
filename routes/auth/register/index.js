@@ -40,8 +40,6 @@ router.post("/", async (req, res) => {
 
     res.status(200).json({
       displayName: response.displayName,
-      email: response.email,
-      localId: response.localId 
     });
   } catch (error) {
     console.error("Sign-up Error:", error.message);

@@ -7,14 +7,14 @@ router.use(verifyToken);
 
 router.post("/task", async (req, res) => {
   const response = await createTask({
-      title: req.body.title,
-      description: req.body.description,
-      status: req.body.status,
-      isCompleted: req.body.isCompleted,
-      // parentTaskId: req.parentTaskId,
-      assigneeId: req.body.userId,
-      createdAt: new Date().toISOString(),
-      dueDate: req.body.dueDate,
+    title: req.body.title,
+    description: req.body.description,
+    status: req.body.status,
+    isCompleted: req.body.isCompleted,
+    // parentTaskId: req.parentTaskId,
+    assigneeId: req.user.uid,
+    createdAt: new Date().toISOString(),
+    dueDate: req.body.dueDate,
   });
 
   if (response){
