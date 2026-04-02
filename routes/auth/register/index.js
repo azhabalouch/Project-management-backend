@@ -1,6 +1,6 @@
 const express = require('express');
 const signUp = require('./registerUtils');
-const createUserData = require('./userDataUtils');
+const createUserData = require('../../../utils/user/profile/createUserDataUtils');
 const router = express.Router();
 
 router.post("/", async (req, res) => {

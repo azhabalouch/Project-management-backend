@@ -1,6 +1,6 @@
 const express = require('express');
 const signInWithPassword = require('./loginUtils');
-const getUserDataUtils = require('../../user/task/getUserDataUtils');
+const getUserDataUtils = require('../../../utils/user/profile/getUserDataUtils');
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
       sameSite: 'Strict',
       maxAge: 604800000 
     });
-
+    
     res.status(200).json(userData);
 
   } catch (error) {

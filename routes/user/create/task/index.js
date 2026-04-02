@@ -1,7 +1,7 @@
 const express = require('express');
-const verifyToken = require('../../../middleware/validateTokenMiddleware');
+const verifyToken = require('../../../../middleware/auth/validateTokenMiddleware');
 const router = express.Router();
-const createTask = require('./createTaskUtils');
+const createTask = require('../../../../utils/user/tasks/createTaskUtils');
 
 router.use(verifyToken);
 

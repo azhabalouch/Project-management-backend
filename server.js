@@ -7,7 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser')
 
 const userAuth = require('./routes/auth')
-const userTask = require('./routes/user/task');
+const userTask = require('./routes/user');
 
 const app = express();
 

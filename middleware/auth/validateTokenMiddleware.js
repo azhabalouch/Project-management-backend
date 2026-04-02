@@ -3,7 +3,7 @@
  */
 
 const { getAuth } = require('firebase-admin/auth');
-const refreshFirebaseToken = require('../utils/refreshTokenUtils');
+const refreshFirebaseToken = require('../../utils/auth/refreshTokenUtils');
 
 async function setNewIdToken(req, res, refreshToken){
   const newTokens = await refreshFirebaseToken(refreshToken);
