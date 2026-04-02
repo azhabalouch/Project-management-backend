@@ -12,7 +12,7 @@ router.get("/tasks", async (req, res) => {
   if (response){
     res.status(200).send(response);
   } else {
-    res.status(404).send("Retrieving tasks failed.");
+    res.status(404).send({error: "Retrieving tasks failed."});
   }
 })
 

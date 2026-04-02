@@ -5,9 +5,14 @@ const db = getFirestore();
 module.exports = async function getUserTasks(userId){
   try {
     const userRef = db.collection('users').doc(userId);
-    const tasksRef = userRef.collection('tasks');
+    const taskRef = userRef.collection('tasks');
 
-    const tasks = await tasksRef.get();
+    const snapshot = await taskRef.get();
+
+    const tasks = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
 
     return tasks;
   } catch (error) {
