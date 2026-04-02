@@ -9,10 +9,8 @@ module.exports = async function createUserData(userId, userData){
     const profileRef = userRef.collection('profile').doc('details');
 
     await profileRef.set({
-      name: {
-        firstName: userData.firstName,
-        lastName: userData.lastName
-      },
+      firstName: userData.firstName,
+      lastName: userData.lastName,
       email: userData.email,
       userId: userId
     });

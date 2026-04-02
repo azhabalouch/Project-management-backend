@@ -1,5 +1,6 @@
 const express = require('express');
 const signInWithPassword = require('./loginUtils');
+const getUserDataUtils = require('../../user/task/getUserDataUtils');
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -8,7 +9,7 @@ router.post("/", async (req, res) => {
 
   try {
     const response = await signInWithPassword({ email, password, returnSecureToken });
-
+    const userData = await getUserDataUtils(response.localId);
     const idToken = response.idToken;
     const refreshToken = response.refreshToken;
 
@@ -26,9 +27,8 @@ router.post("/", async (req, res) => {
       maxAge: 604800000 
     });
 
-    res.status(200).json({
-      displayName: response.displayName,
-    });
+    res.status(200).json(userData);
+
   } catch (error) {
     console.error("Sign-in Error:", error.message);
     const statusCode = error.status || 500;

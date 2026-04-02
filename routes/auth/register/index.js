@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     const dataEntry = await createUserData(response.localId, {firstName, lastName, email});
 
     if (!dataEntry) {
-      throw error;
+      throw new Error('User data creation failed');
     }
 
     const idToken = response.idToken;
@@ -39,7 +39,8 @@ router.post("/", async (req, res) => {
     });
 
     res.status(200).json({
-      displayName: response.displayName,
+      firstName: firstName,
+      lastName: lastName
     });
   } catch (error) {
     console.error("Sign-up Error:", error.message);
