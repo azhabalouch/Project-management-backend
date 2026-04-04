@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const verifyToken = require('../../../../middleware/auth/validateTokenMiddleware');
-const getUserTasks = require('../../../../utils/user/tasks/getTaskUtils');
+const getUserTasks = require('./getTaskUtils');
 
 router.use(verifyToken);
 

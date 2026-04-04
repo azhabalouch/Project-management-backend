@@ -1,7 +1,7 @@
 const express = require('express');
 const verifyToken = require('../../../../middleware/auth/validateTokenMiddleware');
 const router = express.Router();
-const createTask = require('../../../../utils/user/tasks/createTaskUtils');
+const createTask = require('./createTaskUtils');
 
 router.use(verifyToken);
 
@@ -12,7 +12,7 @@ router.post("/task", async (req, res) => {
     status: req.body.status,
     isCompleted: req.body.isCompleted,
     // parentTaskId: req.parentTaskId,
-    assigneeId: req.user.uid,
+    // assigneeId: req.user.uid,
     createdAt: new Date().toISOString(),
     dueDate: req.body.dueDate,
   });
