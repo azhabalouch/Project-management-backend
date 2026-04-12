@@ -17,7 +17,7 @@ module.exports = async function createUserData(userId, userData){
 
     return true;
   } catch (error) {
-    console.error("Firestore Error:", error);
+    console.error('Firestore Error:', error);
     return false;
   }
 }

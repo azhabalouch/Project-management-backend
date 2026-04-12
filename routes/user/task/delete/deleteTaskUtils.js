@@ -10,7 +10,7 @@ module.exports = async function deleteTask(userId, taskId){
 
     return true;
   } catch (error) {
-    console.error("Firestore error: ", error);
+    console.error('Firestore error: ', error);
     return false;
   }
 }

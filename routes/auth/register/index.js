@@ -3,7 +3,7 @@ const signUp = require('./registerUtils');
 const createUserData = require('../../../utils/user/profile/createUserDataUtils');
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   const { 
     email,
     password,
@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
       lastName: lastName
     });
   } catch (error) {
-    console.error("Sign-up Error:", error.message);
+    console.error('Sign-up Error:', error.message);
     const statusCode = error.status || 500;
     res.status(statusCode).send(error.message);
   }

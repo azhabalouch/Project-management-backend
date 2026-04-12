@@ -13,7 +13,7 @@ module.exports = async function getUserData(userId){
 
     return { firstName, lastName };
   } catch (error) {
-    console.error("Firestore Error:", error);
+    console.error('Firestore Error:', error);
     return null;
   }
 }

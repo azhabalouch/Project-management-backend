@@ -5,13 +5,13 @@ const patchTask = require('./patchTaskUtils.js');
 
 router.use(verifyToken);
 
-router.patch("/patch", async (req, res) => {
+router.patch('/', async (req, res) => {
   const response = await patchTask(req.body.id, req);
 
   if (response){
-    res.status(200).send("Task created successfully.");
+    res.status(200).send('Task created successfully.');
   } else {
-    res.status(404).send("Task creation failed.");
+    res.status(404).send('Task creation failed.');
   }
 })
 

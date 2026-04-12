@@ -15,7 +15,7 @@ module.exports = async function signInWithPassword(data) {
     return responseData;
   }
 
-  const errorMessage = responseData.error?.message || response.statusText || "Authentication failed";
+  const errorMessage = responseData.error?.message || response.statusText || 'Authentication failed';
   const error = new Error(errorMessage);
   error.status = response.status;
   throw error;

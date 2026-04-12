@@ -4,9 +4,9 @@ const verifyToken = require('../../../middleware/auth/validateTokenMiddleware');
 
 router.use(verifyToken);
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   res.status(200).json({
-    user: "Verified"
+    user: 'Verified'
   });
 });
 

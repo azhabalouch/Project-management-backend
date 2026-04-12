@@ -6,13 +6,13 @@ const getUserTasks = require('./getTaskUtils');
 
 router.use(verifyToken);
 
-router.get("/get", async (req, res) => {
+router.get('/', async (req, res) => {
   const response = await getUserTasks(req.user.uid);
 
   if (response){
     res.status(200).send(response);
   } else {
-    res.status(404).send({error: "Retrieving tasks failed."});
+    res.status(404).send({error: 'Retrieving tasks failed.'});
   }
 })
 

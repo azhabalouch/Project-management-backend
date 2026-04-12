@@ -11,7 +11,7 @@ module.exports = async function createTask(userId, taskData){
 
     return true;
   } catch (error) {
-    console.error("Firestore error: ", error);
+    console.error('Firestore error: ', error);
     return false;
   }
 }

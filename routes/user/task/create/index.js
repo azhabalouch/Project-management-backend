@@ -5,7 +5,7 @@ const createTask = require('./createTaskUtils');
 
 router.use(verifyToken);
 
-router.post("/create", async (req, res) => {
+router.post('/', async (req, res) => {
   const response = await createTask(req.user.uid, {
     title: req.body.title,
     description: req.body.description,
@@ -18,9 +18,9 @@ router.post("/create", async (req, res) => {
   });
 
   if (response){
-    res.status(200).send("Task created successfully.");
+    res.status(200).send('Task created successfully.');
   } else {
-    res.status(404).send("Task creation failed.");
+    res.status(404).send('Task creation failed.');
   }
 })
 
