@@ -6,7 +6,7 @@ const getUserTasks = require('./getTaskUtils');
 
 router.use(verifyToken);
 
-router.get("/tasks", async (req, res) => {
+router.get("/get", async (req, res) => {
   const response = await getUserTasks(req.user.uid);
 
   if (response){

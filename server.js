@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/auth', userAuth);
-app.use('/user', userTask);
+app.use('/user/task', userTask);
 
 const port = 3000;
 

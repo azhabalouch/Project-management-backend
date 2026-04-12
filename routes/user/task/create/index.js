@@ -5,8 +5,8 @@ const createTask = require('./createTaskUtils');
 
 router.use(verifyToken);
 
-router.post("/task", async (req, res) => {
-  const response = await createTask({
+router.post("/create", async (req, res) => {
+  const response = await createTask(req.user.uid, {
     title: req.body.title,
     description: req.body.description,
     status: req.body.status,

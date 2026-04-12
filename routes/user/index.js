@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const taskCreate = require('./create/task');
-const taskGet = require('./get/tasks');
-const taskPatch = require('./patch/task');
+const taskCreate = require('./task/create');
+const taskGet = require('./task/get');
+const taskPatch = require('./task/patch');
+const taskDelete = require('./task/delete');
 
-router.use('/create', taskCreate);
-router.use('/get', taskGet);
-router.use('/patch', taskPatch);
+router.use('/', taskCreate);
+router.use('/', taskGet);
+router.use('/', taskPatch);
+router.use('/', taskDelete);
 
 module.exports = router;

@@ -2,9 +2,9 @@ const { getFirestore } = require('firebase-admin/firestore');
 
 const db = getFirestore();
 
-module.exports = async function createTask(taskData){
+module.exports = async function createTask(userId, taskData){
   try {
-    const userRef = db.collection('users').doc(taskData.assigneeId);
+    const userRef = db.collection('users').doc(userId);
     const tasksRef = userRef.collection('tasks');
 
     await tasksRef.add(taskData);
