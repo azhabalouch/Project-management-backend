@@ -11,14 +11,14 @@ async function setNewIdToken(req, res, refreshToken){
   res.cookie('idToken', newTokens.id_token, {
     httpOnly: true,
     secure: true,
-    sameSite: 'Strict',
+    sameSite: 'none',
     maxAge: 3600000 
   });
 
   res.cookie('refreshToken', newTokens.refresh_token, {
     httpOnly: true,
     secure: true,
-    sameSite: 'Strict',
+    sameSite: 'none',
     maxAge: 604800000 
   });
 

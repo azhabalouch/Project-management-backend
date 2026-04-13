@@ -5,7 +5,7 @@ router.get('/', async (req, res) => {
   const cookieOptions = {
     httpOnly: true,
     secure: true,
-    sameSite: 'Strict',
+    sameSite: 'none',
   };
 
   res.clearCookie('idToken', cookieOptions);

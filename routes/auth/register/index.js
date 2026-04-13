@@ -27,14 +27,14 @@ router.post('/', async (req, res) => {
     res.cookie('idToken', idToken, {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'none',
       maxAge: 3600000 
     });
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: true,
-      sameSite: 'Strict',
+      sameSite: 'none',
       maxAge: 604800000 
     });
 
