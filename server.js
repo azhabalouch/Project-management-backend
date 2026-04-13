@@ -14,7 +14,7 @@ const app = express();
 app.use(helmet());
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://azhabalouch.github.io'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
