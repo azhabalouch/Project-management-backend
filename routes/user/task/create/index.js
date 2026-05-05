@@ -11,14 +11,16 @@ router.post('/', async (req, res) => {
     description: req.body.description,
     status: req.body.status,
     isCompleted: req.body.isCompleted,
-    // parentTaskId: req.parentTaskId,
-    // assigneeId: req.user.uid,
+    projectId: req.body.projectId,
+    priority: req.body.priority,
+    subtasks: req.body.subtasks || [],
     createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     dueDate: req.body.dueDate,
   });
 
   if (response){
-    res.status(200).send('Task created successfully.');
+    res.status(200).json({ id: response, message: 'Task created successfully.' });
   } else {
     res.status(404).send('Task creation failed.');
   }

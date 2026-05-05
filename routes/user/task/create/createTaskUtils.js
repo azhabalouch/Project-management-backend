@@ -7,9 +7,9 @@ module.exports = async function createTask(userId, taskData){
     const userRef = db.collection('users').doc(userId);
     const tasksRef = userRef.collection('tasks');
 
-    await tasksRef.add(taskData);
+    const docRef = await tasksRef.add(taskData);
 
-    return true;
+    return docRef.id;
   } catch (error) {
     console.error('Firestore error: ', error);
     return false;

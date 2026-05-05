@@ -7,7 +7,10 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser')
 
 const userAuth = require('./routes/auth')
-const userTask = require('./routes/user');
+const userTask = require('./routes/user')
+const projectRoutes = require('./routes/project')
+const calendarRoutes = require('./routes/calendar')
+const todoRoutes = require('./routes/todo')
 
 const app = express();
 
@@ -27,6 +30,9 @@ app.use(express.json());
 
 app.use('/auth', userAuth);
 app.use('/user', userTask);
+app.use('/project', projectRoutes);
+app.use('/calendar', calendarRoutes);
+app.use('/todo', todoRoutes);
 
 const port = 3000;
 

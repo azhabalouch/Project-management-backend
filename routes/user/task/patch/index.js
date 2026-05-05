@@ -6,12 +6,16 @@ const patchTask = require('./patchTaskUtils.js');
 router.use(verifyToken);
 
 router.patch('/', async (req, res) => {
-  const response = await patchTask(req.body.id, req);
+  const { taskId, ...updateData } = req.body;
+  const response = await patchTask(req.user.uid, taskId, {
+    ...updateData,
+    updatedAt: new Date().toISOString(),
+  });
 
   if (response){
-    res.status(200).send('Task created successfully.');
+    res.status(200).send('Task updated successfully.');
   } else {
-    res.status(404).send('Task creation failed.');
+    res.status(404).send('Task update failed.');
   }
 })
 

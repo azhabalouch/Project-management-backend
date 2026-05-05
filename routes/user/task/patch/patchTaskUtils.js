@@ -2,12 +2,12 @@ const { getFirestore } = require('firebase-admin/firestore');
 
 const db = getFirestore();
 
-module.exports = async function patchTask(taskId, data){
+module.exports = async function patchTask(userId, taskId, updateData){
   try {
-    const userRef = db.collection('users').doc(data.user.uid);
+    const userRef = db.collection('users').doc(userId);
     const tasksRef = userRef.collection('tasks').doc(taskId);
 
-    await tasksRef.update(data.body);
+    await tasksRef.update(updateData);
 
     return true;
   } catch (error) {
