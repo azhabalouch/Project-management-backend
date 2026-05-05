@@ -25,8 +25,16 @@ async function moveCompletedUserTaskToHistory(userId) {
       const sourceRef = tasksCollectionRef.doc(taskId);
       const destRef = historyCollectionRef.doc(taskId);
 
+      // Strip undefined values before writing to Firestore
+      const cleanedData = {};
+      for (const [key, value] of Object.entries(data)) {
+        if (value !== undefined) {
+          cleanedData[key] = value;
+        }
+      }
+
       // Add the Set and Delete operations to our batch
-      batch.set(destRef, data);
+      batch.set(destRef, cleanedData);
       batch.delete(sourceRef);
       
       // Save the data to return later
