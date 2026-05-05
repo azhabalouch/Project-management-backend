@@ -1,5 +1,5 @@
 const express = require('express');
-const verifyToken = require('../../../../../middleware/auth/validateTokenMiddleware');
+const verifyToken = require('../../../../../../middleware/auth/validateTokenMiddleware');
 const router = express.Router();
 const addSubtask = require('./addSubtaskUtils');
 
