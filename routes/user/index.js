@@ -15,4 +15,34 @@ router.use('/task/delete', taskDelete);
 router.use('/task/history', taskHistory);
 router.use('/task', taskSubtask);
 
+const todoCreate = require('./todo/create');
+const todoGet = require('./todo/get');
+const todoPatch = require('./todo/patch');
+const todoDelete = require('./todo/delete');
+
+router.use('/todo/create', todoCreate);
+router.use('/todo/get', todoGet);
+router.use('/todo/patch', todoPatch);
+router.use('/todo/delete', todoDelete);
+
+const projectCreate = require('../user/project/create');
+const projectGet = require('../user/project/get');
+const projectPatch = require('../user/project/patch');
+const projectDelete = require('../user/project/delete');
+
+router.use('/project/create', projectCreate);
+router.use('/project/get', projectGet);
+router.use('/project/patch', projectPatch);
+router.use('/project/delete', projectDelete);
+
+const eventCreate = require('./event/create');
+const eventGet = require('./event/get');
+const eventPatch = require('./event/patch');
+const eventDelete = require('./event/delete');
+
+router.use('/event/create', eventCreate);
+router.use('/event/get', eventGet);
+router.use('/event/patch', eventPatch);
+router.use('/event/delete', eventDelete);
+
 module.exports = router;
