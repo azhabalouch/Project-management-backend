@@ -13,6 +13,7 @@ router.post('/', async (req, res) => {
     isCompleted: req.body.isCompleted,
     projectId: req.body.projectId,
     priority: req.body.priority,
+    tags: req.body.tags,
     subtasks: req.body.subtasks || [],
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
