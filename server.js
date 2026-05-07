@@ -4,31 +4,40 @@ require('./config/firebase');
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const AppError = require('./utils/AppError');
+const globalErrorHandler = require('./middleware/errorMiddleware');
 
-const userAuth = require('./routes/auth')
-const userTask = require('./routes/user')
+// Route Imports
+const taskRoutes = require('./routes/task.routes');
+const projectRoutes = require('./routes/project.routes');
+const todoRoutes = require('./routes/todo.routes');
+const eventRoutes = require('./routes/event.routes');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
 app.use(helmet());
-
-app.use(cors({
-    // origin: ['http://localhost:5173', 'https://azhabalouch.github.io'],
-    origin: ['http://localhost:5173', 'https://azhabalouch.dev'],
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
-
+app.use(cors({ origin: ['http://localhost:5173'], credentials: true }));
 app.use(cookieParser());
-
 app.use(express.json());
 
-app.use('/auth', userAuth);
-app.use('/user', userTask);
+// API Mounting
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/tasks', taskRoutes);
+app.use('/api/v1/projects', projectRoutes);
+app.use('/api/v1/todos', todoRoutes);
+app.use('/api/v1/events', eventRoutes);
 
-const port = 3000;
+// Catch unhandled routes
+app.all('/*/', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+// Global Error Handler must be the last middleware
+app.use(globalErrorHandler);
+
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`App is listening at http://localhost:${port}`);
