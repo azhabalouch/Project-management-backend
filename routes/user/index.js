@@ -45,4 +45,14 @@ router.use('/event/get', eventGet);
 router.use('/event/patch', eventPatch);
 router.use('/event/delete', eventDelete);
 
+const noteCreate = require('./note/create');
+const noteGet = require('./note/get');
+const notePatch = require('./note/patch');
+const noteDelete = require('./note/delete');
+
+router.use('/note/create', noteCreate);
+router.use('/note/get', noteGet);
+router.use('/note/patch', notePatch);
+router.use('/note/delete', noteDelete);
+
 module.exports = router;

@@ -71,7 +71,35 @@ async function getUserTaskHistory(userId) {
   }
 }
 
+async function deleteUserTaskHistory(userId) {
+  const historyCollectionRef = db.collection('users').doc(userId).collection('history');
+
+  try {
+    const snapshot = await historyCollectionRef.get();
+
+    if (snapshot.empty) {
+      return true;
+    }
+
+    let batch = db.batch();
+    let operationCount = 0;
+
+    snapshot.forEach((docSnap) => {
+      batch.delete(docSnap.ref);
+      operationCount++;
+    });
+
+    await batch.commit();
+    console.log(`Successfully deleted ${operationCount} history tasks.`);
+    return true;
+  } catch (error) {
+    console.error('Error deleting task history:', error);
+    return false;
+  }
+}
+
 module.exports = {
   moveCompletedUserTaskToHistory,
-  getUserTaskHistory
+  getUserTaskHistory,
+  deleteUserTaskHistory
 };
